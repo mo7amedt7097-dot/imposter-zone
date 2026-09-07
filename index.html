@@ -4,19 +4,82 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😈</text></svg>" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-    <meta name="description" content="IMPOSTER - لعبة الشلة الأولى في مصر على موبايل واحد. مين فيكم مش عارف ومين فيكم بيهبد؟" />
+    <meta name="description" content="IMPOSTER - لعبة الشلة الأولى في مصر على موبايل واحد أو عدة هواتف. مين فيكم مش عارف ومين فيكم بيهبد؟" />
     <title>IMPOSTER | إمبوستر - مين فيكم بيهبد؟</title>
+    
+    <!-- Fonts & Tailwind CSS CDN -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+      :root {
+        font-family: 'Cairo', 'Tajawal', system-ui, -apple-system, sans-serif;
+        color-scheme: dark;
+        background-color: #120A12;
+        color: #F4F0E8;
+        direction: rtl;
+      }
+      body {
+        margin: 0;
+        padding: 0;
+        background: radial-gradient(circle at 50% 0%, #2A102E 0%, #120A12 70%);
+        min-height: 100vh;
+        overflow-x: hidden;
+        user-select: none;
+        -webkit-user-select: none;
+        -webkit-tap-highlight-color: transparent;
+      }
+      .glass-panel {
+        background: rgba(27, 14, 25, 0.75);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(217, 39, 114, 0.2);
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+      }
+      .glass-card {
+        background: linear-gradient(135deg, rgba(42, 16, 46, 0.6) 0%, rgba(27, 14, 25, 0.8) 100%);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(217, 39, 114, 0.18);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      }
+      .glow-pink {
+        box-shadow: 0 0 25px rgba(217, 39, 114, 0.4);
+      }
+      .text-glow-yellow {
+        text-shadow: 0 0 15px rgba(229, 185, 26, 0.6);
+      }
+      ::-webkit-scrollbar {
+        width: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #120A12;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #4A1E55;
+        border-radius: 9999px;
+      }
+    </style>
+
     <script>
       window.addEventListener('error', function(e) {
-        var root = document.getElementById('root');
+        var root = document.getElementById('app-root');
         if (root && (!root.children || root.children.length === 0)) {
-          root.innerHTML = '<div style="padding:30px 20px;color:#F4F0E8;text-align:center;font-family:sans-serif;max-width:400px;margin:50px auto;background:rgba(42, 16, 46, 0.95);border-radius:20px;border:1px solid #D92772;"><h2 style="color:#E5B91A;font-size:18px;margin-bottom:10px;">حدث خطأ أثناء تحميل اللعبة</h2><p style="font-size:13px;color:#fff;word-break:break-all;margin-bottom:15px;">' + (e.message || e) + '</p><p style="font-size:11px;color:#aaa;margin-bottom:20px;">' + (e.filename || '') + (e.lineno ? (':' + e.lineno) : '') + '</p><button onclick="localStorage.clear();window.location.reload();" style="padding:10px 20px;background:#D92772;color:#fff;border:none;border-radius:10px;font-weight:bold;cursor:pointer;">إعادة المحاولة</button></div>';
+          root.innerHTML = '<div style="padding:30px 20px;color:#F4F0E8;text-align:center;font-family:sans-serif;max-width:400px;margin:50px auto;background:rgba(42, 16, 46, 0.95);border-radius:20px;border:1px solid #D92772;"><h2 style="color:#E5B91A;font-size:18px;margin-bottom:10px;">حدث خطأ أثناء تحميل اللعبة</h2><p style="font-size:13px;color:#fff;word-break:break-all;margin-bottom:15px;">' + (e.message || e) + '</p><button onclick="localStorage.clear();window.location.reload();" style="padding:10px 20px;background:#D92772;color:#fff;border:none;border-radius:10px;font-weight:bold;cursor:pointer;">إعادة المحاولة</button></div>';
         }
       });
     </script>
   </head>
-  <body class="bg-[#120A12] text-[#F4F0E8]">
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
+  <body class="bg-[#120A12] text-[#F4F0E8] min-h-screen flex flex-col justify-between">
+    <div id="app-root" class="min-h-screen flex flex-col justify-between max-w-md mx-auto w-full relative">
+      <div id="header-container"></div>
+      <main id="view-container" class="flex-1 flex flex-col justify-between"></main>
+      <div id="modal-container"></div>
+    </div>
+
+    <!-- Pure Vanilla JS Entry Point -->
+    <script type="module" src="./js/app.js"></script>
   </body>
 </html>
